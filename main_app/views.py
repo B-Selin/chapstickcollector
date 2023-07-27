@@ -1,13 +1,7 @@
 from django.shortcuts import render
+from .models import Chapstick
 
 
-chapsticks = [
-  {'location': 'Office Desk', 'flavor': 'cherry', 'description': 'my daily chapstick'},
-  {'location': 'Kitchen Counter', 'flavor': 'vanilla', 'description': 'use this one while baking'},
-  {'location': 'Car Cup Holder', 'flavor': 'mint', 'description': 'keep this one in the car'},
-  {'location': 'Left Nightstand', 'flavor': 'coconut', 'description': 'use this one before bed'},
-  {'location': 'Bathroom', 'flavor': 'coconut', 'description': 'use this one while getting ready'}
-]
 
 # Create your views here.
 
@@ -18,9 +12,8 @@ def about(request):
     return render(request, 'about.html')
 
 def chapsticks_index(request):
-    return render(request, 'chapsticks/index.html', {
-        'chapsticks': chapsticks
-    })
+    chapsticks = Chapstick.objects.all()
+    return render(request, 'chapsticks/index.html', { 'chapsticks': chapsticks })
 
 # def chapstick_detail(request, chapstick_id):
 #     return render(request, 'chapsticks/detail.html')    
