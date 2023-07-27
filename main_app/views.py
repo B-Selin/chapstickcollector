@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Chapstick
 
 
@@ -26,8 +26,11 @@ class ChapstickCreate(CreateView):
     success_url = '/chapsticks/'
 # or we can use fields = '__all__'
 
-# def chapstick_update(request, chapstick_id):
-#     pass
+class ChapstickUpdate(UpdateView):
+  model = Chapstick
+  # Let's disallow the renaming of a cat by excluding the name field!
+  fields = ['location', 'flavour', 'description']
 
-# def chapstick_delete(request, chapstick_id):
-#     pass
+class ChapstickDelete(DeleteView):
+  model = Chapstick
+  success_url = '/chapsticks'

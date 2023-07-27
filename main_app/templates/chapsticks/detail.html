@@ -9,6 +9,10 @@
     <p>Flavour: {{ chapstick.flavour }}</p>
     <p>Description: {{ chapstick.description|linebreaks }}</p>
   </div>
+  <div class="card-action">
+    <a href="{% url 'chapsticks_update' chapstick.id %}">Edit</a>
+    <a href="{% url 'chapsticks_delete' chapstick.id %}">Delete</a>
+  </div>
 </div>
 
 {% endblock %}

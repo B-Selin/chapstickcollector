@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+{% if object %}
+<h1>Edit <span class="teal-text">{{object.location}}</span></h1>
+{% else %}
+<h1>Add Chapstick</h1>
+{% endif %}
+
+
 <h1>Add Chapstick</h1>
 <!-- Leaving the action empty makes the form post to the same url used to display it -->
 <form action="" method="POST">
