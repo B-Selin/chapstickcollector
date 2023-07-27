@@ -15,8 +15,11 @@ def chapsticks_index(request):
     chapsticks = Chapstick.objects.all()
     return render(request, 'chapsticks/index.html', { 'chapsticks': chapsticks })
 
-# def chapstick_detail(request, chapstick_id):
-#     return render(request, 'chapsticks/detail.html')    
+def chapsticks_detail(request, chapstick_id):
+    chapstick = Chapstick.objects.get(id=chapstick_id)
+    return render(request, 'chapsticks/detail.html', { 'chapstick' : chapstick})    
+
+
 
 # def chapstick_create(request):
 #     if request.method == 'POST':

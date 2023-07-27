@@ -5,11 +5,14 @@
 
 {% for chapstick in chapsticks %}
 <div class="card">
-  <div class="card-content">
-    <span class="card-title">{{ chapstick.location }} Chapstick</span>
-    <p>Flavour: {{ chapstick.flavour }}</p>
-    <p>Description: {{ chapstick.description }}</p>
-  </div>
+  <!-- Chapstick info wrap information in card, create a detail page link for each chapstick-->
+  <a href="/chapsticks/{{ chapstick.id }}">
+    <div class="card-content">
+      <span class="card-title">{{ chapstick.location }} Chapstick</span>
+      <p>Flavour: {{ chapstick.flavour }}</p>
+      <p>Description: {{ chapstick.description|linebreaks }}</p>
+    </div>
+  </a>
 </div>
 {% endfor %}
 
