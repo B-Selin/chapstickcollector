@@ -24,7 +24,9 @@ class Chapstick(models.Model):
   def get_absolute_url(self):
       return reverse('detail', kwargs={'chapstick_id': self.id}) 
   
-
+  # include a method to count for total bitemarksa on each chapstick
+  def count_chewmarks(self):
+    return self.chewmark_set.count()
 # make a new model here called ChewMarks
 
 class Chewmark(models.Model):
@@ -44,3 +46,4 @@ class Chewmark(models.Model):
   
   class Meta:
     ordering = ['-date']
+

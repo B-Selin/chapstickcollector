@@ -22,6 +22,12 @@
       {{ chewmark_form.as_p }}
       <input type="submit" class="btn" value="Add Chew Mark">
     </form>
+    <!-- include an if statements if chewmark count is more than 3 on the chapstick -->
+    {% if chapstick.count_chewmarks > 2 %}
+    <div class="card-panel teal-text center-align">This chapstick has seen better days</div>
+    {% else%}
+    <div class="card-panel teal-text center-align">Good as new</div>
+    {% endif %}
     <!-- New Markup Above -->
     <table class="striped">
       <thead>
