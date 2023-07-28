@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from datetime import date
 
 # Create your models here.
 SIZE = (
@@ -26,7 +27,7 @@ class Chapstick(models.Model):
 
 # make a new model here called ChewMarks
 
-class ChewMark(models.Model):
+class Chewmark(models.Model):
   date = models.DateField()
   size = models.CharField(
     max_length=1,
@@ -40,3 +41,6 @@ class ChewMark(models.Model):
   def __str__(self):
     # Nice method for obtaining the friendly value of a Field.choice
     return f"{self.get_size_display()} on {self.date}"
+  
+  class Meta:
+    ordering = ['-date']

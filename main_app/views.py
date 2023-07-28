@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Chapstick
-
+from .forms import ChewmarkForm
 
 
 # Create your views here.
@@ -18,7 +18,23 @@ def chapsticks_index(request):
 
 def chapsticks_detail(request, chapstick_id):
     chapstick = Chapstick.objects.get(id=chapstick_id)
-    return render(request, 'chapsticks/detail.html', { 'chapstick' : chapstick})    
+    chewmark_form = ChewmarkForm()
+    return render(request, 'chapsticks/detail.html', {
+    # include the chapstick and chewmark_form in the context
+    'chapstick': chapstick, 'chewmark_form': chewmark_form
+    })
+
+def add_chewmark(request, chapstick_id):
+  # create a ModelForm instance using the data in request.POST
+  form = ChewmarkForm(request.POST)
+  # validate the form
+  if form.is_valid():
+    # don't save the form to the db until it
+    # has the cat_id assigned
+    new_chewmark = form.save(commit=False)
+    new_chewmark.chapstick_id = chapstick_id
+    new_chewmark.save()
+  return redirect('detail', chapstick_id=chapstick_id)
 
 class ChapstickCreate(CreateView):
     model = Chapstick
