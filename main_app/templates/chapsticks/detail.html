@@ -13,6 +13,25 @@
     <a href="{% url 'chapsticks_update' chapstick.id %}">Edit</a>
     <a href="{% url 'chapsticks_delete' chapstick.id %}">Delete</a>
   </div>
+
+  <div class="col s6">
+    <table class="striped">
+      <thead>
+        <tr>
+          <th>Date of the Incident</th>
+          <th>Size of the Chew Mark</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for bite in chapstick.chewmark_set.all %}
+        <tr>
+          <td>{{bite.date}}</td>
+          <td>{{bite.get_size_display}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 
 {% endblock %}
