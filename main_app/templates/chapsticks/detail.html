@@ -46,19 +46,75 @@
       </tbody>
     </table>
   </div>
-</div>
-<!-- below all HTML -->
-<script>
-  const dateEl = document.getElementById('id_date');
-  // M is Materialize's global variable
-  M.Datepicker.init(dateEl, {
-    format: 'yyyy-mm-dd',
-    defaultDate: new Date(),
-    setDefaultDate: true,
-    autoClose: true
-  });
-  // add additional JS to initialize select below
-  const selectEl = document.getElementById('id_size');
-  M.FormSelect.init(selectEl);
-</script>
-{% endblock %}
+  <hr>
+  <div class="row">
+    <div class="col s6">
+      <h3>{{ chapstick.location }} Chapstick's Sidekicks</h3>
+      {% if chapstick.sidekicks.count %}
+      {% for sidekick in chapstick.sidekicks.all %}
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">
+            A <span>{{ sidekick.name }}</span> {{ sidekick.power }}
+          </span>
+        </div>
+        <div class="card-action">
+          <form action="{% url 'unassoc_sidekick' chapstick.id sidekick.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn">Remove</button>
+          </form>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <h5>No Sidekicks</h5>
+      {% endif %}
+    </div>
+    <div class="col s6">
+      <h3>Available Sidekicks</h3>
+      {% if sidekicks.count %}
+      {% for sidekick in sidekicks.all %}
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">
+            <span>{{ sidekick.name }}</span>: {{ sidekick.power }}
+          </span>
+        </div>
+        <div class="card-action">
+          <form action="{% url 'assoc_sidekick' chapstick.id sidekick.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn">Add</button>
+          </form>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <h5>{{cat.name}} Already Has All sidekicks Available</h5>
+      {% endif %}
+    </div>
+
+
+
+
+  </div>
+
+
+
+
+
+
+  <!-- below all HTML -->
+  <script>
+    const dateEl = document.getElementById('id_date');
+    // M is Materialize's global variable
+    M.Datepicker.init(dateEl, {
+      format: 'yyyy-mm-dd',
+      defaultDate: new Date(),
+      setDefaultDate: true,
+      autoClose: true
+    });
+    // add additional JS to initialize select below
+    const selectEl = document.getElementById('id_size');
+    M.FormSelect.init(selectEl);
+  </script>
+  {% endblock %}

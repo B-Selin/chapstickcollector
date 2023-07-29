@@ -9,10 +9,25 @@ SIZE = (
     ('L', 'Large')
 )
 
+# create a chapstick sidekick personama with name and super power ability, that we will associate with the chapstick
+
+class Sidekick(models.Model):
+  name = models.CharField(max_length=50)
+  power = models.CharField(max_length=120)
+
+  def __str__ (self):
+    return self.name
+  
+  def get_absolute_url(self):
+    return reverse('sidekicks_detail', kwargs={'pk': self.id})
+
+
+
 class Chapstick(models.Model):
   location = models.CharField(max_length=100)
   flavour = models.CharField(max_length=100)
   description = models.TextField(max_length=250)
+  sidekicks = models.ManyToManyField(Sidekick)
 
 
   # Changing this instance method

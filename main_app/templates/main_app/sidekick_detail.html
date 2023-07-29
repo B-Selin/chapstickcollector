@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Sidekick Details</h1>
+
+<div class="row">
+  <div class="col s6 col-offset-3">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">{{ sidekick.name }}</span>
+        <p>Superpower: {{ sidekick.power }}</p>
+      </div>
+      <div class="card-action">
+        <a href="{% url 'sidekicks_update' sidekick.id %}">Edit</a>
+        <a href="{% url 'sidekicks_delete' sidekick.id %}">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
